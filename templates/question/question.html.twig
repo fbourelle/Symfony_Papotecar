@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Question{% endblock %}
+
+{% block main %}
+    <div class="col-8 offset-2">
+        <h2>Poser une question</h2>
+
+        {{ form_start(form) }}
+        {{ form_row(form.content) }}
+        <button class="btn btn-success">Valider</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

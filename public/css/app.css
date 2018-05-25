@@ -1,0 +1,277 @@
+/*font-family: 'Montserrat', sans-serif;*/
+
+header {
+    height: 70px;
+    background-color: #C6ff00;
+    padding-left : 5em;
+    padding-right : 5em;
+    padding-top : 5px;
+    display: flex;
+    justify-content: center;
+}
+
+header * {
+    vertical-align: middle;
+}
+
+.logo {
+    float:left;
+}
+
+.logo img {
+    float:left;
+    height : 60px;
+    width : auto;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container span, h1, h2, h3, h4, h5, h6, p {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#search h2, h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    color: white;
+    text-align: center;
+}
+
+.container h5 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+}
+
+.button-nav {
+    font-weight: 600;
+    font-size: 20px;
+    width: 220px;
+    border:0 solid;
+    border-radius: 5px;
+    transition: all 0.4s ease-out;
+}
+
+.button-nav:hover {
+    box-shadow: 1px 1px 5px rgba(50, 50, 50, 0.5);
+}
+
+.button-search {
+    font-weight: 600;
+    font-size: 20px;
+    border:0 solid;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+input {
+    border-style: none;
+    background-color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 25px;
+}
+
+.grey {
+    color: lightgrey;
+}
+
+.input-search-white {
+    background-color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    height: 40px;
+    margin-bottom: 5px;
+    display: table-cell; /* comportement visuel de cellule */
+    vertical-align: middle;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+.input-search-blue {
+    background-color: #00b8d4;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    height: 40px;
+    margin-bottom: 5px;
+    display: table-cell; /* comportement visuel de cellule */
+    vertical-align: middle;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+
+}
+
+.input-search-blue:hover {
+    background-color: #9d46ff;
+}
+
+.button-no-style {
+
+}
+
+.white {
+    color: white;
+}
+.row{
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.input-search-group {
+    vertical-align: middle;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+#form-search{
+    width: 100%;
+    height: auto;
+}
+
+/*#form-search  div:nth-child(n+2) {*/
+/*margin-left: 20px;*/
+/*}*/
+
+.button-blue {
+    background-color: #00b8d4;
+    color : white;
+}
+
+.button-blue:hover {
+    background-color: #9d46ff;
+    color: white;
+}
+
+.button-white {
+    background-color: white;
+    color: #00b8d4;
+}
+
+.button-white:hover {
+    background-color: #9d46ff;
+    color: white;
+}
+
+.icon-blue {
+    color: #00b8d4;
+    font-size: 50px;
+}
+
+.icon-blue:hover {
+    color: #9d46ff;
+    font-size: 50px;
+}
+
+.ul-nav {
+    padding-top:10px;
+    margin:0;
+    list-style-type:none;
+}
+.ul-nav li {
+    display: inline-block;
+    margin-left:10px;
+    float:right; /*pour IE*/
+    vertical-align: middle;
+    /*display: table-cell;*/
+}
+.ul-nav li a {
+    display:block;
+    text-decoration:none;
+    text-align:center;
+    border:0 solid;
+}
+
+ul {
+    margin:0;
+    list-style-type:none;
+}
+
+.material-icons.md-36 { font-size: 36px; }
+
+.home-image-full {
+    width: 100%;
+    height: 450px;
+    background-image: url("../pictures/default/img_fond.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 5em;
+}
+
+#search {
+    padding-top: 15%;
+}
+
+.travel-search {
+    background-color: white;
+}
+
+.travel-search:hover {
+    background-color: #baffff;
+}
+
+.panel-heading {
+    padding-left: 1em;
+}
+
+.panel-heading h4 {
+    text-align: left;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.avatar-big {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-bottom: 0.5em;
+}
+
+.avatar-small {
+    float: left;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-right: 1em;
+}
+
+.avatars {
+    margin-bottom: 1em;
+}
+
+
+.price {
+    font-weight: 800;
+    color: #00b8d4;
+    font-size: 2em;
+}
+
+.user {
+    font-size: 2em;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+main {
+    flex: 1 1 auto;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}

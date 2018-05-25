@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('../public/css/app.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+</head>
+
+<body style="background-image: url({% block bg %}{% endblock %});">
+<header>
+    <div class="logo">
+        <a href="{{ path('home') }}" title="accueil">
+            <img src="{{ asset('pictures/logo.png') }}" alt="Papotecar'">
+        </a>
+    </div>
+    <ul class="ul-nav">
+        {% if app.user %}
+
+            <li class="nav-item">
+                <a href="{{ path('logout') }}" class="button-nav button-white">
+                    <span>Me déconnecter</span></a>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ path('profil_user', {"id" : app.user.id}) }}" class="button-nav button-white">
+                    <span>Mon compte</span>
+                </a>
+            </li>
+        {% else %}
+
+            <li class="nav-item">
+                <a href="{{ path('login') }}" title="Connexion">
+                    <i class="material-icons md-36 icon-blue">account_circle</i><span>Connexion</span>
+                </a>
+            </li>
+
+
+
+            <li class="nav-item">
+                <a href="{{ path('registerUser') }}" title="inscription">
+                    <button type="button" class="button-nav button-white">
+                        <span>Inscription</span>
+                    </button>
+                </a>
+            </li>
+
+        {% endif %}
+        <li class="nav-item">
+            <a href="{{ path('travel_home') }}" class="button-nav button-blue" title="Proposer un trajet">
+                <span>Proposer un trajet</span>
+            </a>
+        </li>
+    </ul>
+
+</header>
+
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+{% block main %}
+
+{% endblock %}
+
+<footer>
+    {% block footer %}
+    {% endblock %}
+    <footer class="card-header card-header-image">
+
+        <p class="float-right"><a href="#">Back to top</a></p>
+        <p>© 2018 Semi-Croustillant team    <script>
+        function myFunction() {
+
+            let depart = document.getElementById("depart").value;
+            let arrivee = document.getElementById("arrivee").value;
+            let date = document.getElementById("date").value;
+
+            if (depart !== "" && arrivee !== "" && date !== ""){
+                window.location = "travelSearch/" + depart + "/" + arrivee + "/" + date;
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+</footer>
+</body>
+

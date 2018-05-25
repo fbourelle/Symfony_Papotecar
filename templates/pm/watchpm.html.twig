@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publier une annonce{% endblock %}
+{% block stylesheets %}
+
+{% endblock %}
+{% block main %}
+    <div class="container">
+        <div class="row" style="margin-top: 3em; border: 1px solid lightgrey; border-radius: 5px; padding: 2em;">
+            <div class="col-md-2 col-sm-12" style="border-right: 1px solid lightgrey">
+
+                {#<p>{{ userInfos.profilepicture }}</p>#}
+                {% if userInfos.profilepicture %}
+                    <div class="avatar-big">
+                        <img src="{{ asset('pictures/profiles/' ~ userInfos.profilepicture ) }}">
+                    </div>
+                {% else %}
+                    <div class="avatar-big">
+                        <img src="{{ asset('pictures/profiles/avatar.png') }}">
+                    </div>
+                    {% if app.user %}
+                        <a href="#" title="ajouter une photo">
+                            <button type="button" class="btn btn-light btn-sm">Modifier mon profil
+                            </button>
+                        </a>
+                    {% endif %}
+                {% endif %}
+
+            </div>
+
+            <div class="col-md-10 col-sm-12">
+                <div>
+                    <ul>
+                        <li><span class="user">{{ userInfos.name }} {{ userInfos.firstname }}</span></li>
+                        <li>Membre depuis le {{ userInfos.datecreated|date }}</li>
+                    </ul>
+                </div>
+                <hr>
+                <div>
+                    <ul>
+                        <li><h4 style="color: #00b8d4; text-align: left;">Messages privés</h4><hr></li>
+
+                        {#<p>{{ userpm.userlauncherid.username }}</p>#}
+                        <ul>
+                            <li><h6 style="color: #00b8d4; text-align: left;">Messages envoyés </h6></li>
+                            {% for pm in userpmlauncher %}
+                                <li>
+                                    <div class="avatar-small">
+                                        {% if pm.userlauncherid.profilepicture %}
+                                            <img src="{{ asset('pictures/profiles/' ~ pm.userlauncherid.profilepicture ) }}">
+                                        {% else %}
+                                            <img src="{{ asset('pictures/profiles/avatar.png') }}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="avatar-small">
+                                        {% if pm.usertargetid.profilepicture %}
+                                            <img src="{{ asset('pictures/profiles/' ~ pm.usertargetid.profilepicture ) }}">
+                                        {% else %}
+                                            <img src="{{ asset('pictures/profiles/avatar.png') }}">
+                                        {% endif %}
+                                    </div>
+                                    <span>Message à </span><span style="font-weight: 600;">{{ pm.usertargetid.username }}</span><small>, le {{ pm.datecreated|date }}</small>
+                                    <p>{{ pm.content }}</p>
+                                    <a href="{{ path('pm', {"id" : pm.usertargetid.id}) }}">
+                                        <button type="button" class="btn btn-primary btn-sm">
+                                            Envoyer un nouveau message
+                                        </button>
+                                    </a>
+                                    <hr>
+                                </li>
+                            {% else %}
+                                <li>Pas de messages envoyés</li>
+                            {% endfor %}
+                        </ul>
+                        <hr>
+                        <UL>
+                            <li><h6 style="color: #00b8d4; text-align: left;">Messages reçus </h6></li>
+                            {% for pm in userpmtarget %}
+                                <li>
+                                    <div class="avatars">
+                                            <div class="avatar-small">
+                                                {% if pm.userlauncherid.profilepicture %}
+                                                    <img src="{{ asset('pictures/profiles/' ~ pm.userlauncherid.profilepicture ) }}">
+                                                {% else %}
+                                                 <img src="{{ asset('pictures/profiles/avatar.png') }}">
+                                                {% endif %}
+
+                                            </div>
+                                            <div class="avatar-small">
+                                                {% if pm.usertargetid.profilepicture %}
+                                                    <img src="{{ asset('pictures/profiles/' ~ pm.usertargetid.profilepicture ) }}">
+
+                                                {% else %}
+                                                    <img src="{{ asset('pictures/profiles/avatar.png') }}">
+                                                {% endif %}
+                                            </div>
+                                    </div>
+                                    <span>Message de </span><span style="font-weight: 600;">{{ pm.userlauncherid.username }} </span><small>, le {{ pm.datecreated|date }}</small>
+                                    <p>{{ pm.content }}</p>
+                                    <a href="{{ path('pm', {"id" : pm.userlauncherid.id}) }}">
+                                        <button type="button" class="btn btn-primary btn-sm">
+                                            Répondre
+                                        </button>
+                                    </a>
+                                    <hr>
+                                </li>
+                            {% else %}
+                                <li>Pas de messages reçus</li>
+                            {% endfor %}
+                        </UL>
+
+                    </ul>
+                </div>
+                <hr>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    </div>
+
+
+
+{% endblock %}

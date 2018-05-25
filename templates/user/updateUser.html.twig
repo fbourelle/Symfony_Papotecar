@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block main %}
+    <div class="container" style="margin-top: 3em; border: 1px solid lightgrey; border-radius: 5px; padding: 2em;">
+        <div class="row">
+            <div class="col-12">
+                <h4>Modifier mon profil</h4>
+                <div id="registerDiv">
+                    {{ form_start(updateUserForm) }}
+                    {{ form_row(updateUserForm.firstname, {'attr': {'value': user.firstname} }) }}
+                    {{ form_row(updateUserForm.name, {'attr': {'value': user.name} }) }}
+                    {{ form_row(updateUserForm.username, {'attr': {'value': user.username} }) }}
+                    {{ form_row(updateUserForm.email, {'attr': {'value': user.email} }) }}
+                    {{ form_row(updateUserForm.licencenumber, {'attr': {'value': user.licencenumber} }) }}
+                    {{ form_row(updateUserForm.profilePicture, {'attr': {'value': user.profilePicture} }) }}
+                    {{ form_row(updateUserForm.password, {'attr': {'value': user.password} }) }}
+                    {{ form_end(updateUserForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

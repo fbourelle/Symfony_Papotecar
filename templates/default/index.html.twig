@@ -1,0 +1,246 @@
+{% extends 'base.html.twig' %}
+{% block title %}Hello !{% endblock %}
+{% block body %}
+{% endblock %}
+{% block main %}
+    <div class="home-image-full">
+        <div class="container">
+            <div id="search">
+                <h2>
+                    Un jour j'irai à Chateauroux avec toi !
+                </h2>
+                <h5>
+                    Tous les chemins mènent où vous voulez aller, covoiturez !
+                </h5>
+                <div id="form-search" class="row">
+                    <div class="input-search-white grey col-sm-12 col-md-12 col-lg-3">
+                        <div class="input-search-group row">
+                            <i class="material-icons grey col-2">location_on</i>
+                            <input class="col-10" type="text" placeholder="Départ" id="depart">
+                        </div>
+                    </div>
+                    <div class="input-search-white grey col-sm-12 col-md-12 col-lg-3">
+                        <div class="input-search-group row">
+                            <i class="material-icons grey col-2">location_on</i>
+                            <input class="col-10" type="text" placeholder="Arrivée" id="arrivee">
+                        </div>
+                    </div>
+                    <div class="input-search-white grey col-sm-12 col-md-12 col-lg-3">
+                        <div class="input-search-group row">
+                            <i class="material-icons grey col-2" >date_range</i>
+                            <input class="col-10" type="date" placeholder="Date" id="date" value="{{ "now"|date("Y-m-d") }}">
+                        </div>
+                    </div>
+                    <div id="btn-blue" class="input-search-blue white col-sm-12 col-md-12 col-lg-3">
+                        <div class="input-search-group row">
+                            <button id="btn-blue" class="button-search" onclick="myFunction()" style="margin-top: -10px;width: 100%;">
+                                <span style="vertical-align: middle">
+                                    <i class="material-icons white" style="margin-top: 6px; margin-right: 10px;">directions_car</i>
+                                </span>
+                                <span>
+                                    <span>C'est parti !</span>
+                                </span>
+
+                            </button>
+                        </div>
+                    </div>
+                    {#<div class="col-sm-12 col-md-12 col-lg-3">#}
+                    {#<button class="button-search button-blue"><i class="material-icons">directions_car</i><span>C'est parti !</span></button>#}
+                    {#</div>#}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <article>
+            <div class="entry_content">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <img src="{{ asset('pictures/default/855891006.jpg') }}" alt="">
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <h3>
+                            Ta voiture n'est pas une monoplace ?
+                        </h3>
+                        <p>Partage ta voiture et ton trajet !</p>
+                        <a href="{{ path('travel_home') }}"><button type="button" class="button-nav button-blue" title="Proposer un trajet">
+                                <span>Proposer un trajet</span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article>
+            <div class="entry_content">
+                <p></p><div class="wrapper" style="background-color: #ffffff;">
+                    <div class="row "><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div style="height:30px"></div><div class="wrapper  " style="">
+                                <div class="row "><div class="col-xs-12 col-xxs-6 col-sm-6 col-md-3 col-lg-3"><div class="blox_element blox_elem_service style1  ">
+                                            <span class="service_icon icon-building" style="color:;"></span>
+                                            <h3>Faites des économies</h3>
+                                            <div class="service_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</div>
+                                        </div></div><div class="col-xs-12 col-xxs-6 col-sm-6 col-md-3 col-lg-3"><div class="blox_element blox_elem_service style1  ">
+                                            <span class="service_icon icon-bookmark-empty" style="color:;"></span>
+                                            <h3>Rencontrez des gens sympas</h3>
+                                            <div class="service_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</div>
+                                        </div></div><div class="col-xs-12 col-xxs-6 col-sm-6 col-md-3 col-lg-3"><div class="blox_element blox_elem_service style1  ">
+                                            <span class="service_icon icon-heart-empty" style="color:;"></span>
+                                            <h3>Améliorez vos trajets</h3>
+                                            <div class="service_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</div>
+                                        </div></div><div class="col-xs-12 col-xxs-6 col-sm-6 col-md-3 col-lg-3"><div class="blox_element blox_elem_service style1  ">
+                                            <span class="service_icon icon-comment-alt" style="color:;"></span>
+                                            <h3>Soyez libres !</h3>
+                                            <div class="service_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</div>
+                                        </div></div></div>
+                            </div><div style="height:30px"></div></div></div>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <div class="features-1" style="margin-bottom: 30px;">
+        <div class="row">
+            {% for travel in lastTravels %}
+                <div class="col-4">
+                    <a href="{{ path('travel_detail', {"id" : travel.id}) }}" class="info btn-success">
+                        <button style="background-color: #C6ff00; border:none;width:100%;padding: 10px;">
+                            <h4 class="info-title">{{ travel.startcity }}</h4>
+                            <h4 class="info-title">{{ travel.endcity }}</h4>
+                            <span>A partir de {{ travel.price }} Euros</span>
+                        </button>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-profile card-plain">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card-header card-header-image">
+                            <a href="#pablo">
+                                <img class="img" src="assets/assets-for-demo/testimonials/test1.jpg">
+                            </a>
+                            <div class="colored-shadow"
+                                 style="background-image: url(&quot;assets/assets-for-demo/testimonials/test1.jpg&quot;); opacity: 1;"></div>
+                            <div class="colored-shadow"
+                                 style="background-image: url(&quot;assets/assets-for-demo/testimonials/test1.jpg&quot;); opacity: 1;"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h4 class="card-title">Mathieu George Guy</h4>
+                            <p class="card-description">
+                                "test"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-profile card-plain">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card-header card-header-image">
+                            <a href="#pablo">
+                                <img class="img" src="assets/assets-for-demo/testimonials/test2.jpg">
+                            </a>
+                            <div class="colored-shadow"
+                                 style="background-image: url(&quot;assets/assets-for-demo/testimonials/test2.jpg&quot;); opacity: 1;"></div>
+                            <div class="colored-shadow"
+                                 style="background-image: url(&quot;assets/assets-for-demo/testimonials/test2.jpg&quot;); opacity: 1;"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h4 class="card-title">Kevin Node Forever Js</h4>
+                            <p class="card-description">
+                                "test"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-profile card-plain">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card-header card-header-image">
+                            <a href="#pablo">
+                                <img class="img" src="assets/assets-for-demo/testimonials/test3.jpg">
+                            </a>
+                            <div class="colored-shadow"
+                                 style="background-image: url(&quot;assets/assets-for-demo/testimonials/test3.jpg&quot;); opacity: 1;"></div>
+                            <div class="colored-shadow"
+                                 style="background-image: url(&quot;assets/assets-for-demo/testimonials/test3.jpg&quot;); opacity: 1;"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h4 class="card-title">Kevin "j'ai eu mon alternance j'en ai plus rien à foutre" Guillier</h4>
+                            <p class="card-description">
+                                "Damn Daniel!!! This Material UI Kit is fresh AF! Amazing work!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-profile card-plain">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card-header card-header-image">
+                            <a href="#pablo">
+                                <img class="img" src="assets/assets-for-demo/testimonials/test3.jpg">
+                            </a>
+                            <div class="colored-shadow"
+                                 style="background-image: url(&quot;assets/assets-for-demo/testimonials/test3.jpg&quot;); opacity: 1;"></div>
+                            <div class="colored-shadow"
+                                 style="background-image: url(&quot;assets/assets-for-demo/testimonials/test3.jpg&quot;); opacity: 1;"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h4 class="card-title">Tanguy "j'ai autrechose à foutre" chenier</h4>
+                            <p class="card-description">
+                                "test"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-profile card-plain">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card-header card-header-image">
+                            <a href="#pablo">
+                                <img class="img" src="assets/assets-for-demo/testimonials/test3.jpg">
+                            </a>
+                            <div class="colored-shadow"
+                                 style="background-image: url(&quot;assets/assets-for-demo/testimonials/test3.jpg&quot;); opacity: 1;"></div>
+                            <div class="colored-shadow"
+                                 style="background-image: url(&quot;assets/assets-for-demo/testimonials/test3.jpg&quot;); opacity: 1;"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h4 class="card-title">Frederic "voix impressionante" </h4>
+                            <p class="card-description">
+                                "test"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

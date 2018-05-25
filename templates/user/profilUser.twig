@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publier une annonce{% endblock %}
+{% block stylesheets %}
+
+{% endblock %}
+{% block main %}
+    <div class="container">
+        <div class="row" style="margin-top: 3em; border: 1px solid lightgrey; border-radius: 5px; padding: 2em;">
+            <div class="col-md-2 col-sm-12" style="border-right: 1px solid lightgrey">
+
+                {#<p>{{ userInfos.profilepicture }}</p>#}
+                {% if userInfos.profilepicture %}
+                    <div class="avatar-big">
+                        <img src="{{ asset('pictures/profiles/' ~ userInfos.profilepicture ) }}">
+                    </div>
+                {% else %}
+                    <div class="avatar-big">
+                        <img src="{{ asset('pictures/profiles/avatar.png') }}">
+                    </div>
+                    {% if app.user %}
+                        <a href="{{ path('updateUser', {"id" : userInfos.id}) }}" title="modifier el profil">
+                            <button type="button" class="btn btn-light btn-sm">Modifier mon profil
+                            </button>
+                        </a>
+                    {% endif %}
+                {% endif %}
+
+            </div>
+
+            <div class="col-md-10 col-sm-12">
+                <div>
+                    <ul>
+                        <li><span class="user">{{ userInfos.name }} {{ userInfos.firstname }}</span></li>
+                        <li>Membre depuis le {{ userInfos.datecreated|date }}</li>
+                        {% if app.user %}
+                            {% if app.user.id == userInfos.id %}
+                                <li style="margin-top: 1em;">
+                                    <a href="{{ path('pmwatch', {"id" : userInfos.id}) }}">
+                                        <button type="button" class="btn btn-primary btn-sm" title="Voir mes messages privés">
+                                            Voir mes messages privés
+                                        </button>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li style="margin-top: 1em;">
+                                    <a href="{{ path('pm', {"id" : userInfos.id}) }}">
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="right" title="Contactez {{ userInfos.username }}">
+                                            Envoyer un message privé
+                                        </button>
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                        {% else %}
+                            <li style="margin-top: 1em;">
+                                <a href="{{ path('pm', {"id" : userInfos.id}) }}">
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="right" title="Connectez-vous d'abord" disabled>
+                                        Envoyer un message privé
+                                    </button>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <hr>
+                <div>
+                    <ul>
+                        <li><h4 style="color: #00b8d4; text-align: left;">Véhicules</h4></li>
+                        <li><small style="color: #AAA;">Pas de véhicule</small></li>
+                    </ul>
+                </div>
+                <hr>
+                <ul>
+                    <li><h4 style="color: #00b8d4; text-align: left;">Commentaires</h4></li>
+                    {% for comment in usercomment %}
+                        <li>
+
+                            <div>
+                                <div>
+                                    <div class="avatar-small">
+                                        {% if userInfos.profilepicture %}
+                                        <img src="{{ asset('pictures/profiles/' ~ comment.userlauncher.profilepicture ) }}"></div>
+                                    {% else %}
+                                        <img src="{{ asset('pictures/profiles/avatar.png') }}">
+                                    {% endif %}
+                                    <span style="font-weight: 600;">{{ comment.userlauncher.username }}</span><small>, le {{ comment.datecreated|date }}</small> </div>
+                                <div hidden="hidden" id="signalUserId">{{ userInfos.id }}</div>
+                                <div hidden="hidden" id="signalCommentaryId">{{ comment.id }}</div>
+                                <p>{{ comment.content }} <button style="float: right" id="btnSignal" class="btn btn-danger">Signaler</button></p>
+
+                            </div>
+
+                            <hr>
+                        </li>
+                    {% else %}
+                        <small style="color: #AAA;">Pas de commentaires pour {{ userInfos.username }}</small>
+                    {% endfor %}
+                </ul>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    </div>
+
+    <div id="modalContainer"></div>
+
+    <script>
+        $(function(){
+            document.querySelector("#btnSignal").addEventListener('click', function(e){
+                e.preventDefault();
+                let id = document.getElementById("signalCommentaryId").firstChild.nodeValue;
+                let userId = document.getElementById("signalUserId").firstChild.nodeValue;
+
+                $.ajax({
+                    type: "GET",
+                    url: "../comment/reclamation/"+id+"/"+userId,
+                    success: function(data)
+                    {
+                        $('#modalContainer').html(data);
+                        $("#buttonModalClick").click();
+                    }
+                });
+            });
+        });
+    </script>
+
+
+{% endblock %}

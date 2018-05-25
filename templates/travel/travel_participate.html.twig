@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participer à un trajet{% endblock %}
+{% block stylesheets %}
+
+{% endblock %}
+{% block main %}
+    <div class="panel panel-info">
+        <h1>Les trajets disponible</h1>
+    </div>
+    {% if travels %}
+        {% for travel in travels %}
+            <h2> Titre de l'annonce : {{ travel.title }}</h2>
+            <p>Date de création de l'annonce: {{ travel.datecreated|date }}</p>
+            <p> Auteur : {{ travel.user.firstname }} {{ travel.user.name|upper }}</p>
+            <p> Ville de départ : {{ travel.startcity }} {{ travel.endzipcode }}</p>
+            <p> Heure de départ : {{ travel.starthour|date }}</p>
+            -------
+            <p> Ville d'arrivée : {{ travel.endaddress }} {{ travel.endcity }}</p>
+            <p> Prix du trajet : {{ travel.price }} Euros</p>
+            {#   {% if travel.passengers.contains(user) %}
+                   <a class="btn btn-danger" href="{{ path('travel_remove', {"id": travel.id}) }}">Ne plus faire parti du
+                       trajet</a>
+               {% else %}
+                   {%  if app.user in travel.passengers %}
+                       <a href="{{ path('travel_remove', {"id": travel.id}) }}" class="btn btn-danger">Ne plus participer au trajet</a>
+                   {% else %}
+                       <a href="{{ path('travel_add', {"id": travel.id }) }}" class="btn btn-success">Participer au trajet</a>
+                   {% endif %}
+
+
+
+                   <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+
+                       <!-- Identify your business so that you can collect the payments. -->
+                       <input type="hidden" name="business" value="kin@kinskards.com">
+
+                       <!-- Specify a PayPal Shopping Cart Add to Cart button. -->
+                       <input type="hidden" name="cmd" value="_cart">
+                       <input type="hidden" name="add" value="1">
+
+                       <!-- Specify details about the item that buyers will purchase. -->
+                       <input type="hidden" name="item_name" value="{{ travel.title }}">
+                       <input type="hidden" name="amount" value="{{ travel.price }}">
+                       <input type="hidden" name="currency_code" value="USD">
+
+                       <!-- Display the payment button. -->
+                       <input type="image" name="submit"
+                              src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif"
+                              alt="Valider le trajet">
+                       <img alt="" id="imgPaypal"
+                            src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
+                   </form>
+
+                   <a class="btn btn-success" href="{{ path('travel_add', {"id": travel.id }) }}">Participer au trajet</a>
+                   <form action="question/{{ travel.id }}">
+                       <button class="btn btn-secondary">Posez une question</button>
+                   </form>
+                   <div id="questionsTravel">
+   <h4>Questions</h4>
+                       {% for question in travel.questions %}
+                           <h5>Par {{ question.user.username }}</h5>
+                           <p> {{ question.content }} </p>
+                       {% endfor %}
+                   </div>
+
+
+
+               {% endif %}#}
+            <hr>
+        {% endfor %}
+    {% else %}
+        <div class="btn btn-error">There are actually no travel</div>
+    {% endif %}
+{% endblock %}

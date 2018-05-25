@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Alerter{% endblock %}
+
+{% block main %}
+    <div class="col-8 offset-2">
+
+        <h2>Alerter {{ offenser.username }} sur son comportement</h2>
+
+
+        <div>
+            <h3>Commentaire incriminant : </h3>
+            <p>
+                {{ comment.content }}
+            </p>
+
+            {{ form_start(form) }}
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+
+{% endblock %}

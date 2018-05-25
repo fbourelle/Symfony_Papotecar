@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rechercher un trajet{% endblock %}
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block main %}
+    <div class="container" style="margin-top: 3em;">
+        <h4>{{ totalResults }} Résultat(s) pour <span style="font-weight: 600; color: #00b8d4;">{{ startcity }} - {{ endcity }}<span></h4>
+        <hr>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12">
+                {% for travel in travels %}
+                    <div class="travel-search">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 style="font-weight: 600; color: #00b8d4;">{{ travel.startcity }} - {{ travel.endcity }}</h4>
+                                <small>Publié le {{ travel.datecreated|date('d-m-Y') }}</small>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 1em;">
+                            <div class="col-md-2 col-sm-12" style="border-right: 0.5px solid #868686;">
+                                <div class="avatar">
+                                    {% if travel.user.profilepicture != null %}
+                                        <img src="{{ asset('pictures/profiles/'~travel.user.profilepicture) }}" alt="username">
+                                    {% else %}
+                                        <img src="{{ asset('pictures/profiles/avatar.png') }}" alt="username">
+                                    {% endif %}
+
+                                </div>
+                                <div style="font-weight: 600;">{{ travel.user.username }}</div>
+                                <p>Note</p>
+                                <a href="{{ path('profil_user', {'id': travel.user.id}) }}" title="voir le profil de {{ travel.user.username }}">
+                                    <small>Voir le profil</small>
+                                </a>
+                            </div>
+
+                            <div class="col-md-7 col-sm-12">
+                                <div><i class="material-icons grey col-2">location_on</i> Départ : {{ travel.startcity }}</div><br>
+                                <div><small><i class="material-icons grey col-2">access_time</i> Le {{ travel.starthour|date('d-m-Y')~' à '~ travel.starthour|date('H:i') }} | Lieu : {{ travel.startaddress }}</small></div><br>
+                                <div><i class="material-icons grey col-2">location_on</i> Ville d'arrivée : {{ travel.endcity }}</div><br>
+                                <div><small><i class="material-icons grey col-2">access_time</i> Lieu : {{ travel.endaddress }}</small></div><br>
+                                {#<button class="button-nav button-blue">Je réserve</button>#}
+                            </div>
+
+                            <div class="col-md-3 col-sm-12">
+                                <span class="price">44 €</span><br>
+                                <span><small>Prix par place</small></span><br>
+                                <h6>3 places restantes</h6>
+                                <a href="{{ path('travel_detail', {"id": travel.id}) }}" class="btn btn-success">Voir ce trajet</a>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+            {% endfor %}
+
+            </div>
+
+
+            <div class="{% if totalResults == 0 %}col-md-8 offset-md-2{% else %}col-md-3{% endif %}
+             col-sm-12"
+                 style="background-color: #00b8d4; padding-top: 25px;min-height: 300px;" id="moduleSearch">
+                <div style="position: fixed;" id="moduleSearchDiv">
+                    <h5>Nouvelle recherche</h5>
+                    <form role="form">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="material-icons grey col-2">location_on</i></span>
+                            <input class="form-control" placeholder="Départ" type="text" id="depart">
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="material-icons grey col-2">location_on</i></span>
+                            <input class="form-control" placeholder="Arrivée" type="text" id="arrivee">
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="material-icons grey col-2">date_range</i></span>
+                            <input class="form-control" type="date" placeholder="Date" id="date" value="{{ "now"|date("Y-m-d") }}">
+                        </div>
+                        <button class="button-nav button-white" style="width: 100%;" id="btn-search">C'est parti !</button>
+                    </form>
+                </div>
+            </div>
+
+            <script>
+                $(function(){
+                    resize();
+                    function resize(){
+                        let parent = $('#moduleSearch').width();
+                        $('#moduleSearchDiv').width(parent);
+                    }
+                    window.onresize = resize;
+
+                    document.querySelector("#btn-search").addEventListener('click', function(e){
+                        e.preventDefault();
+                        myFunction();
+                    })
+
+                });
+            </script>
+        </div>
+
+    </div>
+
+{% endblock %}

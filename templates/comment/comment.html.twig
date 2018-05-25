@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commentaire{% endblock %}
+
+{% block main %}
+    <div class="col-8 offset-2">
+
+        <h2>Poster un commentaire sur le trajet avec {{ cible.username }}</h2>
+
+        {{ form_start(form) }}
+
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

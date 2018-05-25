@@ -1,0 +1,32 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="display: none" id="buttonModalClick">
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Réclamation</h3>
+                <button type="button" class="close" id="buttonCancelModal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ form_start(form, {'attr':{'action':'comment/reclamation/'~comment.id}}) }}
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#buttonCancelModal').click(function () {
+        window.location = "./{{ user.id }}"
+        //$("#modalContainer").empty();
+    });
+    $('#exampleModalCenter').modal({
+        backdrop: 'static',
+        keyboard: false
+    })
+</script>
